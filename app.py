@@ -141,7 +141,8 @@ def usuario():
     ganhos = Ganho.query.filter_by(usuario_id=usuario_id).all()  # Obtém os ganhos do usuário logado
     
     try:
-        return render_template('usuario.html', usuario=usuario, ganhos=ganhos) 
+        usuario_logado = Usuario.query.first()
+        return render_template('usuario.html', usuario=usuario, ganhos=ganhos, nome = usuario_logado.nome) 
     except Exception as e:
         print(f"Erro ao renderizar página de usuário: {e}")
         flash('Erro ao carregar a página do usuário.', 'error')
